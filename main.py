@@ -1,5 +1,6 @@
 from tkinter import *
 import math
+import winsound
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#FF8B8B"
@@ -37,6 +38,10 @@ def start_timer():
 	short_break_sec = SHORT_BREAK_MIN * 60
 	long_break_sec = LONG_BREAK_MIN * 60
 
+	beep_duration = 1000  # milliseconds
+	beep_frequency = 1000  # Hz
+	winsound.Beep(beep_frequency, beep_duration)  # emits 'beep' sound at the end of every work/break interval
+
 	if reps % 8 == 0:
 		# 8th rep
 		count_down(long_break_sec)
@@ -58,7 +63,7 @@ def count_down(count):
 	start_button.config(state="disabled")
 	if count > 0:
 		global timer
-		timer = window.after(1000, count_down, count - 1)
+		timer = window.after(1, count_down, count - 1)
 	else:
 		start_timer()
 		if reps % 2 == 0:
